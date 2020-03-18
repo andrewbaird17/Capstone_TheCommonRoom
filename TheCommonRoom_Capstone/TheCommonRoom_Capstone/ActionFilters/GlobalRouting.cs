@@ -22,13 +22,11 @@ namespace TheCommonRoom_Capstone.ActionFilters
             {
                 if (_claimsPrincipal.IsInRole("Household Administrator"))
                 {
-                    context.Result = new RedirectToActionResult("Index",
-                    "HouseholdAdministrators", null);
+                    context.Result = new RedirectToActionResult("Index", "HouseholdAdministrators", null);
                 }
                 else if (_claimsPrincipal.IsInRole("Roommate"))
                 {
-                    context.Result = new RedirectToActionResult("Index",
-                    "Roommates", null);
+                    context.Result = new RedirectToActionResult("Index", "Roommates", null);
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,8 +23,10 @@ namespace TheCommonRoom_Capstone.Controllers
         // GET: HouseholdAdministrators
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.HouseholdAdministrators.Include(h => h.Household).Include(h => h.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var hhaInDB = _context.HouseholdAdministrators.Where(h => h.IdentityUserId == userId).FirstOrDefault();
+            var roomatesInHousehold = _context.Roommates.Where(r => r.HouseholdId == hhaInDB.HouseholdId);
+            return View(await roomatesInHousehold.ToListAsync());
         }
 
         // GET: HouseholdAdministrators/Details/5

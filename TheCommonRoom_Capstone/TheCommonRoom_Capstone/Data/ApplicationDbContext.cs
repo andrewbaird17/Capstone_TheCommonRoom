@@ -30,16 +30,16 @@ namespace TheCommonRoom_Capstone.Data
             base.OnModelCreating(builder);
             builder.Entity<IdentityRole>()
             .HasData(
-            new IdentityRole
-            {
-                Name = "Household Administrator",
-                NormalizedName = "HOUSEHOLD ADMINISTRATOR"
-            },
-            new IdentityRole
-            {
-                Name = "Roommate",
-                NormalizedName = "ROOMMATE"
-            }
+                new IdentityRole
+                {
+                    Name = "Household Administrator",
+                    NormalizedName = "HOUSEHOLD ADMINISTRATOR"
+                },
+                new IdentityRole
+                {
+                    Name = "Roommate",
+                    NormalizedName = "ROOMMATE"
+                }
             );
         }
     }
