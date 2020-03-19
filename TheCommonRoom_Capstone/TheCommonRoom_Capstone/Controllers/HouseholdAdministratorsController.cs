@@ -52,24 +52,26 @@ namespace TheCommonRoom_Capstone.Controllers
         // GET: HouseholdAdministrators/Create
         public IActionResult Create()
         {
+            HouseholdAdministrator newAdmin = new HouseholdAdministrator();
             ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id");
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            return View(newAdmin);
         }
 
         // POST: HouseholdAdministrators/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PhoneNumber,HouseholdId,IdentityUserId")] HouseholdAdministrator householdAdministrator)
+        public async Task<IActionResult> Create(HouseholdAdministrator householdAdministrator)
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                householdAdministrator.IdentityUserId = userId;
                 _context.Add(householdAdministrator);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id", householdAdministrator.HouseholdId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", householdAdministrator.IdentityUserId);
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name", householdAdministrator.HouseholdId);
             return View(householdAdministrator);
         }
 

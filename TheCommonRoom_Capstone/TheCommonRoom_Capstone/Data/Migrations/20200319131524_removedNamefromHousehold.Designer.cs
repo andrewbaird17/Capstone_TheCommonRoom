@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheCommonRoom_Capstone.Data;
 
 namespace TheCommonRoom_Capstone.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200319131524_removedNamefromHousehold")]
+    partial class removedNamefromHousehold
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace TheCommonRoom_Capstone.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cb1b06a6-139e-4a79-87cb-eade9723d985",
-                            ConcurrencyStamp = "8ff8cb3f-eb01-4938-87a5-4245a655d994",
+                            Id = "3eb0809c-9b82-4401-8bd0-69823d612194",
+                            ConcurrencyStamp = "526c10f5-9c1a-4701-9ead-479c74c0ef18",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "78d32eb7-15ca-44c6-9b9d-309e1e0db76a",
-                            ConcurrencyStamp = "1400edd4-3d3d-49c1-8a5d-4f9f51a9ca23",
+                            Id = "3a61f4a2-0c14-4367-a244-e978f4343075",
+                            ConcurrencyStamp = "d3cd42c0-4c09-4171-a86d-5354d3b08e6d",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });
@@ -290,16 +292,6 @@ namespace TheCommonRoom_Capstone.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Boards");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1
-                        },
-                        new
-                        {
-                            Id = 2
-                        });
                 });
 
             modelBuilder.Entity("TheCommonRoom_Capstone.Models.Chore", b =>
@@ -372,28 +364,11 @@ namespace TheCommonRoom_Capstone.Data.Migrations
                     b.Property<int>("BoardId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BoardId");
 
                     b.ToTable("Households");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BoardId = 1,
-                            Name = "Andrew's Group"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BoardId = 2,
-                            Name = "Steve's Group"
-                        });
                 });
 
             modelBuilder.Entity("TheCommonRoom_Capstone.Models.HouseholdAdministrator", b =>

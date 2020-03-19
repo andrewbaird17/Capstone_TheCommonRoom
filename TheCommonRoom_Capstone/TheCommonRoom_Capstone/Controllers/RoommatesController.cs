@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,8 +23,9 @@ namespace TheCommonRoom_Capstone.Controllers
         // GET: Roommates
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Roommates.Include(r => r.Household).Include(r => r.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var roomInDB = await _context.Roommates.Where(h => h.IdentityUserId == userId).FirstOrDefaultAsync();
+            return View(roomInDB);
         }
 
         // GET: Roommates/Details/5
@@ -49,18 +51,20 @@ namespace TheCommonRoom_Capstone.Controllers
         // GET: Roommates/Create
         public IActionResult Create()
         {
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id");
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            Roommate newRoommate = new Roommate();
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name");
+            return View(newRoommate);
         }
 
         // POST: Roommates/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PhoneNumber,IsApproved,HouseholdId,IdentityUserId")] Roommate roommate)
+        public async Task<IActionResult> Create(Roommate roommate)
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                roommate.IdentityUserId = userId;
                 _context.Add(roommate);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

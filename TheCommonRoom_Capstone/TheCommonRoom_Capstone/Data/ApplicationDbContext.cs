@@ -41,6 +41,14 @@ namespace TheCommonRoom_Capstone.Data
                     NormalizedName = "ROOMMATE"
                 }
             );
+            builder.Entity<Household>().HasData(
+                new Household { Id = 1, Name = "Andrew's Group", BoardId = 1 },
+                new Household { Id = 2, Name = "Steve's Group", BoardId = 2}
+            );
+            builder.Entity<Board>().HasData(
+                new Board { Id = 1},
+                new Board { Id = 2}
+                );
         }
     }
 }

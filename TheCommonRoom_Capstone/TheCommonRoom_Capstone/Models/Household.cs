@@ -11,6 +11,7 @@ namespace TheCommonRoom_Capstone.Models
     {
         [Key]
         public int Id { get; set; }
+        public string Name { get; set; }
         [ForeignKey("Board")]
         public int BoardId { get; set; }
         public Board board { get; set; }
