@@ -24,8 +24,9 @@ namespace TheCommonRoom_Capstone.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var roomInDB = await _context.Roommates.Where(h => h.IdentityUserId == userId).FirstOrDefaultAsync();
+            var roomInDB = await _context.Roommates.Include("Household").Where(h => h.IdentityUserId == userId).FirstOrDefaultAsync();
             return View(roomInDB);
+
         }
 
         // GET: Roommates/Details/5
@@ -65,12 +66,12 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 roommate.IdentityUserId = userId;
+                roommate.IsApproved = false;
                 _context.Add(roommate);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id", roommate.HouseholdId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", roommate.IdentityUserId);
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name");
             return View(roommate);
         }
 
@@ -87,15 +88,14 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 return NotFound();
             }
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id", roommate.HouseholdId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", roommate.IdentityUserId);
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name", roommate.HouseholdId);            
             return View(roommate);
         }
 
         // POST: Roommates/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,PhoneNumber,IsApproved,HouseholdId,IdentityUserId")] Roommate roommate)
+        public async Task<IActionResult> Edit(int id, Roommate roommate)
         {
             if (id != roommate.Id)
             {
@@ -106,6 +106,8 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 try
                 {
+                    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    roommate.IdentityUserId = userId;
                     _context.Update(roommate);
                     await _context.SaveChangesAsync();
                 }
@@ -123,7 +125,6 @@ namespace TheCommonRoom_Capstone.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id", roommate.HouseholdId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", roommate.IdentityUserId);
             return View(roommate);
         }
 

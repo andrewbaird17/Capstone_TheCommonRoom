@@ -38,8 +38,6 @@ namespace TheCommonRoom_Capstone.Controllers
             }
 
             var householdAdministrator = await _context.HouseholdAdministrators
-                .Include(h => h.Household)
-                .Include(h => h.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (householdAdministrator == null)
             {
@@ -87,8 +85,7 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 return NotFound();
             }
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id", householdAdministrator.HouseholdId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", householdAdministrator.IdentityUserId);
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name");
             return View(householdAdministrator);
         }
 
@@ -106,6 +103,8 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 try
                 {
+                    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    householdAdministrator.IdentityUserId = userId;
                     _context.Update(householdAdministrator);
                     await _context.SaveChangesAsync();
                 }
@@ -122,8 +121,7 @@ namespace TheCommonRoom_Capstone.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id", householdAdministrator.HouseholdId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", householdAdministrator.IdentityUserId);
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name", householdAdministrator.HouseholdId);          
             return View(householdAdministrator);
         }
 
