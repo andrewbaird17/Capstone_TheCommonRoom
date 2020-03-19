@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,11 +19,8 @@ namespace TheCommonRoom_Capstone.Models
         [Display(Name = "All day event?")]
         public bool IsFullDay { get; set; }
         public string Location { get; set; }
-        [ForeignKey("HouseholdAdministrator")]
-        public int? HouseholdAdminId { get; set; }
-        public HouseholdAdministrator HouseholdAdministrator { get; set; }
-        [ForeignKey("Roommate")]
-        public int? RoommateId { get; set; }
-        public Roommate Roomate { get; set; }
+        [ForeignKey("IdentityUser")]
+        public string IdentityUserId { get; set; }
+        public IdentityUser IdentityUser { get; set; }
     }
 }

@@ -26,27 +26,6 @@ namespace TheCommonRoom_Capstone.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var roomInDB = await _context.Roommates.Include("Household").Where(h => h.IdentityUserId == userId).FirstOrDefaultAsync();
             return View(roomInDB);
-
-        }
-
-        // GET: Roommates/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var roommate = await _context.Roommates
-                .Include(r => r.Household)
-                .Include(r => r.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (roommate == null)
-            {
-                return NotFound();
-            }
-
-            return View(roommate);
         }
 
         // GET: Roommates/Create
@@ -88,7 +67,7 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 return NotFound();
             }
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name", roommate.HouseholdId);            
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name", roommate.HouseholdId);
             return View(roommate);
         }
 
@@ -163,5 +142,24 @@ namespace TheCommonRoom_Capstone.Controllers
         {
             return _context.Roommates.Any(e => e.Id == id);
         }
+
+        //public IActionResult AddEvent()
+        //{
+        //    Event newEvent = new Event();
+        //    return View(newEvent);
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> AddEvent(Event eventNew)
+        //{
+        //    if(ModelState.IsValid)
+        //    {
+        //        var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //        eventNew.IdentityUserId = userId;
+        //        _context.Add(eventNew);
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    return RedirectToAction("Index");
+        //}
     }
 }
