@@ -30,15 +30,10 @@ namespace TheCommonRoom_Capstone.Controllers
         }
 
         // GET: HouseholdAdministrators/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var householdAdministrator = await _context.HouseholdAdministrators
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var householdAdministrator = await _context.HouseholdAdministrators.Include("Household").FirstOrDefaultAsync(m => m.IdentityUserId == userId);
             if (householdAdministrator == null)
             {
                 return NotFound();
@@ -73,14 +68,10 @@ namespace TheCommonRoom_Capstone.Controllers
         }
 
         // GET: HouseholdAdministrators/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var householdAdministrator = await _context.HouseholdAdministrators.FindAsync(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var householdAdministrator = await _context.HouseholdAdministrators.FirstOrDefaultAsync(h=> h.IdentityUserId == userId);
             if (householdAdministrator == null)
             {
                 return NotFound();
@@ -94,11 +85,6 @@ namespace TheCommonRoom_Capstone.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, HouseholdAdministrator householdAdministrator)
         {
-            if (id != householdAdministrator.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
@@ -159,6 +145,30 @@ namespace TheCommonRoom_Capstone.Controllers
         private bool HouseholdAdministratorExists(int id)
         {
             return _context.HouseholdAdministrators.Any(e => e.Id == id);
+        }
+    
+        public async Task<IActionResult> ApproveRoommate(int id)
+        {
+            var roommateInDB = await _context.Roommates.FirstOrDefaultAsync(r => r.Id == id);
+            if (roommateInDB.IsApproved == false)
+            {
+                roommateInDB.IsApproved = true;
+                _context.Update(roommateInDB);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> UnapproveRoommate(int id)
+        {
+            var roommateInDB = await _context.Roommates.FirstOrDefaultAsync(r => r.Id == id);
+            if (roommateInDB.IsApproved == true)
+            {
+                roommateInDB.IsApproved = false;
+                _context.Update(roommateInDB);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
         }
     }
 }
