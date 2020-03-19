@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheCommonRoom_Capstone.Data;
 
-namespace TheCommonRoom_Capstone.Data.Migrations
+namespace TheCommonRoom_Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -48,15 +48,15 @@ namespace TheCommonRoom_Capstone.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ec819ac5-a06e-4248-9347-87b2f9c423d5",
-                            ConcurrencyStamp = "741533ee-79a1-4d59-9ce8-5dec288d111b",
+                            Id = "318c30f1-20c6-443c-b78f-ea83a9b166ab",
+                            ConcurrencyStamp = "836defd2-1fbf-4bb5-aa75-3d007916eadb",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "14d54629-7a23-4a82-bbe2-aa9774261940",
-                            ConcurrencyStamp = "926e66ac-1987-44f1-b569-dae0c8f1e32c",
+                            Id = "e174299c-35f5-431e-a31f-74e75235e530",
+                            ConcurrencyStamp = "b40b6e47-e40c-4a8d-9771-b9400350c9e5",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });

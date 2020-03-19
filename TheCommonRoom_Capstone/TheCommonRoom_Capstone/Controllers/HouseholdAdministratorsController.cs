@@ -170,5 +170,24 @@ namespace TheCommonRoom_Capstone.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult AddEvent()
+        {
+            Event newEvent = new Event();
+            return View(newEvent);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEvent(Event eventNew)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                eventNew.IdentityUserId = userId;
+                _context.Add(eventNew);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

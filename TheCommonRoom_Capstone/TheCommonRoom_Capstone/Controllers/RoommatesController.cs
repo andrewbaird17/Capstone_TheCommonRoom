@@ -143,23 +143,23 @@ namespace TheCommonRoom_Capstone.Controllers
             return _context.Roommates.Any(e => e.Id == id);
         }
 
-        //public IActionResult AddEvent()
-        //{
-        //    Event newEvent = new Event();
-        //    return View(newEvent);
-        //}
+        public IActionResult AddEvent()
+        {
+            Event newEvent = new Event();
+            return View(newEvent);
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddEvent(Event eventNew)
-        //{
-        //    if(ModelState.IsValid)
-        //    {
-        //        var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //        eventNew.IdentityUserId = userId;
-        //        _context.Add(eventNew);
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+        [HttpPost]
+        public async Task<IActionResult> AddEvent(Event eventNew)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                eventNew.IdentityUserId = userId;
+                _context.Add(eventNew);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
