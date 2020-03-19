@@ -53,8 +53,7 @@ namespace TheCommonRoom_Capstone.Controllers
         public IActionResult Create()
         {
             HouseholdAdministrator newAdmin = new HouseholdAdministrator();
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Id");
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name");
             return View(newAdmin);
         }
 
@@ -71,7 +70,7 @@ namespace TheCommonRoom_Capstone.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name", householdAdministrator.HouseholdId);
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name");
             return View(householdAdministrator);
         }
 
@@ -96,7 +95,7 @@ namespace TheCommonRoom_Capstone.Controllers
         // POST: HouseholdAdministrators/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,PhoneNumber,HouseholdId,IdentityUserId")] HouseholdAdministrator householdAdministrator)
+        public async Task<IActionResult> Edit(int id, HouseholdAdministrator householdAdministrator)
         {
             if (id != householdAdministrator.Id)
             {
