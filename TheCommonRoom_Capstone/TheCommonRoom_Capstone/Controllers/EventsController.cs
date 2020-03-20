@@ -32,7 +32,7 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 householdId = _context.HouseholdAdministrators.FirstOrDefault(r => r.IdentityUserId == userId).HouseholdId;
             }
-            var household = await _context.Households.Where(h => h.Id == householdId).FirstOrDefaultAsync();
+            //var household = await _context.Households.Where(h => h.Id == householdId).FirstOrDefaultAsync();
             var roommates = await _context.Roommates.Where(e => e.HouseholdId == householdId).ToListAsync();
             var hha = await _context.HouseholdAdministrators.FirstOrDefaultAsync(a => a.HouseholdId == householdId);
             List<Event> events = new List<Event>();
@@ -49,7 +49,6 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 events.Add(item);
             }
-
             // pass household when ready to pass list of events
             return View(events);
         }
@@ -57,6 +56,7 @@ namespace TheCommonRoom_Capstone.Controllers
         // GET: Events/Details/5
         public async Task<IActionResult> Details(int id)
         {
+            ViewBag.APIKey = My_API_Key.GoogleKey;
             var eventFound = await _context.Events.Where(e => e.Id == id).FirstOrDefaultAsync();
             return View(eventFound);
         }
