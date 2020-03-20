@@ -55,7 +55,7 @@ namespace TheCommonRoom_Capstone.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Announcement announcement)
         {
-            var todayDate = DateTime.Today.Date;
+            var todayDate = DateTime.Now.Date;
             if(ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
