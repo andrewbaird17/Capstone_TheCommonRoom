@@ -18,7 +18,6 @@ namespace TheCommonRoom_Capstone.Data
         public DbSet<HouseholdAdministrator> HouseholdAdministrators { get; set; }
         public DbSet<Roommate> Roommates { get; set; }
         public DbSet<Event> Events { get; set; }
-        public DbSet<Board> Boards { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Bill> Bills { get; set; }
         public DbSet<Chore> Chores { get; set; }
@@ -42,13 +41,10 @@ namespace TheCommonRoom_Capstone.Data
                 }
             );
             builder.Entity<Household>().HasData(
-                new Household { Id = 1, Name = "Andrew's Group", BoardId = 1 },
-                new Household { Id = 2, Name = "Steve's Group", BoardId = 2}
+                new Household { Id = 1, Name = "Andrew's Group"},
+                new Household { Id = 2, Name = "Steve's Group"},
+                new Household { Id = 3, Name = "Emily's Group"}
             );
-            builder.Entity<Board>().HasData(
-                new Board { Id = 1},
-                new Board { Id = 2}
-                );
         }
     }
 }

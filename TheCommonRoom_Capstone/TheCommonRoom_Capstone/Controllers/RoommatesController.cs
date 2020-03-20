@@ -161,5 +161,25 @@ namespace TheCommonRoom_Capstone.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult AddAnnouncement()
+        {
+            Announcement newAnnouce = new Announcement();
+            return View(newAnnouce);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddAnnouncement(Announcement announcement)
+        {
+            if(ModelState.IsValid)
+            {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var roomLoggedIn = await _context.Roommates.Where(r => r.IdentityUserId == userId).FirstOrDefaultAsync();
+                announcement.PostedBy = userId;
+                announcement.HouseholdId = roomLoggedIn.HouseholdId;
+                _context.Add(announcement);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
