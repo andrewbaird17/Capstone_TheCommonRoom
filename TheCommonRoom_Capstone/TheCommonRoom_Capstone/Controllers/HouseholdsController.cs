@@ -22,7 +22,7 @@ namespace TheCommonRoom_Capstone.Controllers
         // GET: Households
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Households.Include(h => h.board);
+            var applicationDbContext = _context.Households;
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +35,6 @@ namespace TheCommonRoom_Capstone.Controllers
             }
 
             var household = await _context.Households
-                .Include(h => h.board)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (household == null)
             {
@@ -49,7 +48,6 @@ namespace TheCommonRoom_Capstone.Controllers
         public IActionResult Create()
         {
             Household newhouse = new Household();
-            //ViewData["BoardId"] = new SelectList(_context.Boards, "Id", "Id");
             return View(newhouse);
         }
 
@@ -66,7 +64,6 @@ namespace TheCommonRoom_Capstone.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BoardId"] = new SelectList(_context.Boards, "Id", "Id", household.BoardId);
             return View(household);
         }
 
@@ -83,7 +80,6 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 return NotFound();
             }
-            ViewData["BoardId"] = new SelectList(_context.Boards, "Id", "Id", household.BoardId);
             return View(household);
         }
 
@@ -92,7 +88,7 @@ namespace TheCommonRoom_Capstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,BoardId")] Household household)
+        public async Task<IActionResult> Edit(int id, Household household)
         {
             if (id != household.Id)
             {
@@ -119,7 +115,6 @@ namespace TheCommonRoom_Capstone.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BoardId"] = new SelectList(_context.Boards, "Id", "Id", household.BoardId);
             return View(household);
         }
 
@@ -132,7 +127,6 @@ namespace TheCommonRoom_Capstone.Controllers
             }
 
             var household = await _context.Households
-                .Include(h => h.board)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (household == null)
             {

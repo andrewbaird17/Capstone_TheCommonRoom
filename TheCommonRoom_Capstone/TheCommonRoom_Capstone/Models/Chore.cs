@@ -13,8 +13,8 @@ namespace TheCommonRoom_Capstone.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [ForeignKey("Board")]
-        public int BoardId { get; set; }
-        public Board Board { get; set; }
+        [ForeignKey("Household")]
+        public int HouseholdId { get; set; }
+        public Household Household { get; set; }
     }
 }

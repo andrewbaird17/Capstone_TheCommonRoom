@@ -14,8 +14,8 @@ namespace TheCommonRoom_Capstone.Models
         public string Details { get; set; }
         public string PostedBy { get; set; }
 
-        [ForeignKey("Board")]
-        public int BoardId { get; set; }
-        public Board Board { get; set; }
+        [ForeignKey("Household")]
+        public int HouseholdId { get; set; }
+        public Household Household { get; set; }
     }
 }
