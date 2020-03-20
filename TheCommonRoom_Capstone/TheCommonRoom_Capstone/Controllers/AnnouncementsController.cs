@@ -59,9 +59,17 @@ namespace TheCommonRoom_Capstone.Controllers
             if(ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var roomLoggedIn = await _context.Roommates.Where(r => r.IdentityUserId == userId).FirstOrDefaultAsync();
+                if (User.IsInRole("Roommate"))
+                {
+                    var userLoggedIn = await _context.Roommates.Where(r => r.IdentityUserId == userId).FirstOrDefaultAsync();
+                    announcement.HouseholdId = userLoggedIn.HouseholdId;
+                }
+                else
+                {
+                    var userLoggedIn = await _context.HouseholdAdministrators.Where(r => r.IdentityUserId == userId).FirstOrDefaultAsync();
+                    announcement.HouseholdId = userLoggedIn.HouseholdId;
+                }
                 announcement.PostedBy = userId;
-                announcement.HouseholdId = roomLoggedIn.HouseholdId;
                 announcement.DatePosted = todayDate;
                 _context.Add(announcement);
                 await _context.SaveChangesAsync();

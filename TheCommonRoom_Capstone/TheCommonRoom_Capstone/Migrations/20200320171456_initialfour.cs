@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheCommonRoom_Capstone.Migrations
 {
-    public partial class initialthree : Migration
+    public partial class initialfour : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -197,6 +197,7 @@ namespace TheCommonRoom_Capstone.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Details = table.Column<string>(nullable: true),
+                    DatePosted = table.Column<DateTime>(nullable: false),
                     PostedBy = table.Column<string>(nullable: true),
                     HouseholdId = table.Column<int>(nullable: false)
                 },
@@ -344,8 +345,8 @@ namespace TheCommonRoom_Capstone.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "b3fcb823-f6ab-4647-a8de-262f8d16e4ed", "1c0b76ba-dbe5-47d3-946e-b7c350c008dd", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
-                    { "15b7c3c3-29e0-451a-8927-b69ec7503df2", "7d781a3f-9e0e-4554-bf0b-6038d23599ea", "Roommate", "ROOMMATE" }
+                    { "6e8c019f-971e-484c-bc33-69f25871afc6", "a2995688-62a1-4aef-8cd9-1decc28ce625", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
+                    { "d6c40add-6dfc-4bbc-8f15-f021d0482e31", "b139ef56-63df-426f-a652-0fc9f695152f", "Roommate", "ROOMMATE" }
                 });
 
             migrationBuilder.InsertData(

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheCommonRoom_Capstone.Data;
 
 namespace TheCommonRoom_Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200320171456_initialfour")]
+    partial class initialfour
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2c2eecc1-29b8-419a-8fe4-1d425238b33b",
-                            ConcurrencyStamp = "220dcbfd-9256-421d-83a1-7b7fd2dc1ae0",
+                            Id = "6e8c019f-971e-484c-bc33-69f25871afc6",
+                            ConcurrencyStamp = "a2995688-62a1-4aef-8cd9-1decc28ce625",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "2a7e941b-bab6-4222-95c9-49ed57fd4201",
-                            ConcurrencyStamp = "8810c6b8-26e7-4ce9-ae89-5e00ed4d0901",
+                            Id = "d6c40add-6dfc-4bbc-8f15-f021d0482e31",
+                            ConcurrencyStamp = "b139ef56-63df-426f-a652-0fc9f695152f",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });

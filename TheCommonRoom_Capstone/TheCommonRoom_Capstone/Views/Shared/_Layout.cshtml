@@ -23,16 +23,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            @if (User.IsInRole("Roommate"))
+                            @if (User.IsInRole("Roommate") || User.IsInRole("Household Administrator"))
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Roommates" asp-action="AddEvent">Add Event</a>
-                            }
-                            else if (User.IsInRole("Household Administrator"))
-                            {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="HouseholdAdministrators" asp-action="AddEvent">Add Event</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index">Calendar</a>
                             }
                         </li>
                         <li class="nav-item">
@@ -40,10 +33,24 @@
                             {
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Announcements" asp-action="Index">Announcements</a>
                             }
-                            @*else if (User.IsInRole("Household Administrator"))
+                        </li>
+                        <li class="nav-item">
+                            @if (User.IsInRole("Roommate") || User.IsInRole("Household Administrator"))
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="HouseholdAdministrators" asp-action="AddAnnouncement">Add Announcement</a>
-                            }*@
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Bills" asp-action="Index">Bills</a>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (User.IsInRole("Roommate") || User.IsInRole("Household Administrator"))
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Polls" asp-action="Index">Polls</a>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (User.IsInRole("Roommate") || User.IsInRole("Household Administrator"))
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Chores" asp-action="Index">Chores</a>
+                            }
                         </li>
                     </ul>
                 </div>

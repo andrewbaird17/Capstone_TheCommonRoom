@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheCommonRoom_Capstone.Data;
 
 namespace TheCommonRoom_Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200320151347_initialthree")]
-    partial class initialthree
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,15 +48,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b3fcb823-f6ab-4647-a8de-262f8d16e4ed",
-                            ConcurrencyStamp = "1c0b76ba-dbe5-47d3-946e-b7c350c008dd",
+                            Id = "6e8c019f-971e-484c-bc33-69f25871afc6",
+                            ConcurrencyStamp = "a2995688-62a1-4aef-8cd9-1decc28ce625",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "15b7c3c3-29e0-451a-8927-b69ec7503df2",
-                            ConcurrencyStamp = "7d781a3f-9e0e-4554-bf0b-6038d23599ea",
+                            Id = "d6c40add-6dfc-4bbc-8f15-f021d0482e31",
+                            ConcurrencyStamp = "b139ef56-63df-426f-a652-0fc9f695152f",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });
@@ -239,6 +237,9 @@ namespace TheCommonRoom_Capstone.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DatePosted")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");
