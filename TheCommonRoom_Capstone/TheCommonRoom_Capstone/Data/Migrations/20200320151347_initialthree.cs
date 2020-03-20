@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheCommonRoom_Capstone.Migrations
 {
-    public partial class initial : Migration
+    public partial class initialthree : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,15 +47,16 @@ namespace TheCommonRoom_Capstone.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Boards",
+                name: "Households",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Boards", x => x.Id);
+                    table.PrimaryKey("PK_Households", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,15 +198,15 @@ namespace TheCommonRoom_Capstone.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Details = table.Column<string>(nullable: true),
                     PostedBy = table.Column<string>(nullable: true),
-                    BoardId = table.Column<int>(nullable: false)
+                    HouseholdId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Announcements", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Announcements_Boards_BoardId",
-                        column: x => x.BoardId,
-                        principalTable: "Boards",
+                        name: "FK_Announcements_Households_HouseholdId",
+                        column: x => x.HouseholdId,
+                        principalTable: "Households",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -219,15 +220,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     Type = table.Column<string>(nullable: true),
                     PostedBy = table.Column<string>(nullable: true),
                     TotalAmount = table.Column<double>(nullable: false),
-                    BoardId = table.Column<int>(nullable: false)
+                    HouseholdId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bills_Boards_BoardId",
-                        column: x => x.BoardId,
-                        principalTable: "Boards",
+                        name: "FK_Bills_Households_HouseholdId",
+                        column: x => x.HouseholdId,
+                        principalTable: "Households",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -239,62 +240,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    BoardId = table.Column<int>(nullable: false)
+                    HouseholdId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Chores", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Chores_Boards_BoardId",
-                        column: x => x.BoardId,
-                        principalTable: "Boards",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Households",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    BoardId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Households", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Households_Boards_BoardId",
-                        column: x => x.BoardId,
-                        principalTable: "Boards",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Polls",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
-                    Question = table.Column<string>(nullable: true),
-                    OptionOne = table.Column<string>(nullable: true),
-                    OptionTwo = table.Column<string>(nullable: true),
-                    VotesForOptionOne = table.Column<int>(nullable: false),
-                    VotesForOptionTwo = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    TotalAmount = table.Column<double>(nullable: false),
-                    BoardId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Polls", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Polls_Boards_BoardId",
-                        column: x => x.BoardId,
-                        principalTable: "Boards",
+                        name: "FK_Chores_Households_HouseholdId",
+                        column: x => x.HouseholdId,
+                        principalTable: "Households",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -326,6 +280,33 @@ namespace TheCommonRoom_Capstone.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Polls",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Question = table.Column<string>(nullable: true),
+                    OptionOne = table.Column<string>(nullable: true),
+                    OptionTwo = table.Column<string>(nullable: true),
+                    VotesForOptionOne = table.Column<int>(nullable: false),
+                    VotesForOptionTwo = table.Column<int>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    TotalAmount = table.Column<double>(nullable: false),
+                    HouseholdId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Polls", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Polls_Households_HouseholdId",
+                        column: x => x.HouseholdId,
+                        principalTable: "Households",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -363,33 +344,24 @@ namespace TheCommonRoom_Capstone.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "318c30f1-20c6-443c-b78f-ea83a9b166ab", "836defd2-1fbf-4bb5-aa75-3d007916eadb", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
-                    { "e174299c-35f5-431e-a31f-74e75235e530", "b40b6e47-e40c-4a8d-9771-b9400350c9e5", "Roommate", "ROOMMATE" }
+                    { "b3fcb823-f6ab-4647-a8de-262f8d16e4ed", "1c0b76ba-dbe5-47d3-946e-b7c350c008dd", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
+                    { "15b7c3c3-29e0-451a-8927-b69ec7503df2", "7d781a3f-9e0e-4554-bf0b-6038d23599ea", "Roommate", "ROOMMATE" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Boards",
-                column: "Id",
-                values: new object[]
+                table: "Households",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
                 {
-                    1,
-                    2
+                    { 1, "Andrew's Group" },
+                    { 2, "Steve's Group" },
+                    { 3, "Emily's Group" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Households",
-                columns: new[] { "Id", "BoardId", "Name" },
-                values: new object[] { 1, 1, "Andrew's Group" });
-
-            migrationBuilder.InsertData(
-                table: "Households",
-                columns: new[] { "Id", "BoardId", "Name" },
-                values: new object[] { 2, 2, "Steve's Group" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Announcements_BoardId",
+                name: "IX_Announcements_HouseholdId",
                 table: "Announcements",
-                column: "BoardId");
+                column: "HouseholdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -431,14 +403,14 @@ namespace TheCommonRoom_Capstone.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bills_BoardId",
+                name: "IX_Bills_HouseholdId",
                 table: "Bills",
-                column: "BoardId");
+                column: "HouseholdId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Chores_BoardId",
+                name: "IX_Chores_HouseholdId",
                 table: "Chores",
-                column: "BoardId");
+                column: "HouseholdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_IdentityUserId",
@@ -456,14 +428,9 @@ namespace TheCommonRoom_Capstone.Migrations
                 column: "IdentityUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Households_BoardId",
-                table: "Households",
-                column: "BoardId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Polls_BoardId",
+                name: "IX_Polls_HouseholdId",
                 table: "Polls",
-                column: "BoardId");
+                column: "HouseholdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Roommates_HouseholdId",
@@ -522,9 +489,6 @@ namespace TheCommonRoom_Capstone.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Boards");
         }
     }
 }

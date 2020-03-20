@@ -10,8 +10,8 @@ using TheCommonRoom_Capstone.Data;
 namespace TheCommonRoom_Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200319212616_initial")]
-    partial class initial
+    [Migration("20200320170259_addedpropertyofdatepostedtoannouncement")]
+    partial class addedpropertyofdatepostedtoannouncement
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "318c30f1-20c6-443c-b78f-ea83a9b166ab",
-                            ConcurrencyStamp = "836defd2-1fbf-4bb5-aa75-3d007916eadb",
+                            Id = "2c2eecc1-29b8-419a-8fe4-1d425238b33b",
+                            ConcurrencyStamp = "220dcbfd-9256-421d-83a1-7b7fd2dc1ae0",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "e174299c-35f5-431e-a31f-74e75235e530",
-                            ConcurrencyStamp = "b40b6e47-e40c-4a8d-9771-b9400350c9e5",
+                            Id = "2a7e941b-bab6-4222-95c9-49ed57fd4201",
+                            ConcurrencyStamp = "8810c6b8-26e7-4ce9-ae89-5e00ed4d0901",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });
@@ -240,18 +240,21 @@ namespace TheCommonRoom_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BoardId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DatePosted")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HouseholdId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PostedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BoardId");
+                    b.HasIndex("HouseholdId");
 
                     b.ToTable("Announcements");
                 });
@@ -263,7 +266,7 @@ namespace TheCommonRoom_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BoardId")
+                    b.Property<int>("HouseholdId")
                         .HasColumnType("int");
 
                     b.Property<string>("PostedBy")
@@ -277,31 +280,9 @@ namespace TheCommonRoom_Capstone.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BoardId");
+                    b.HasIndex("HouseholdId");
 
                     b.ToTable("Bills");
-                });
-
-            modelBuilder.Entity("TheCommonRoom_Capstone.Models.Board", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Boards");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1
-                        },
-                        new
-                        {
-                            Id = 2
-                        });
                 });
 
             modelBuilder.Entity("TheCommonRoom_Capstone.Models.Chore", b =>
@@ -311,7 +292,7 @@ namespace TheCommonRoom_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BoardId")
+                    b.Property<int>("HouseholdId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -319,7 +300,7 @@ namespace TheCommonRoom_Capstone.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BoardId");
+                    b.HasIndex("HouseholdId");
 
                     b.ToTable("Chores");
                 });
@@ -366,15 +347,10 @@ namespace TheCommonRoom_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BoardId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BoardId");
 
                     b.ToTable("Households");
 
@@ -382,14 +358,17 @@ namespace TheCommonRoom_Capstone.Migrations
                         new
                         {
                             Id = 1,
-                            BoardId = 1,
                             Name = "Andrew's Group"
                         },
                         new
                         {
                             Id = 2,
-                            BoardId = 2,
                             Name = "Steve's Group"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Emily's Group"
                         });
                 });
 
@@ -431,11 +410,11 @@ namespace TheCommonRoom_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BoardId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("HouseholdId")
+                        .HasColumnType("int");
 
                     b.Property<string>("OptionOne")
                         .HasColumnType("nvarchar(max)");
@@ -460,7 +439,7 @@ namespace TheCommonRoom_Capstone.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BoardId");
+                    b.HasIndex("HouseholdId");
 
                     b.ToTable("Polls");
                 });
@@ -552,27 +531,27 @@ namespace TheCommonRoom_Capstone.Migrations
 
             modelBuilder.Entity("TheCommonRoom_Capstone.Models.Announcement", b =>
                 {
-                    b.HasOne("TheCommonRoom_Capstone.Models.Board", "Board")
+                    b.HasOne("TheCommonRoom_Capstone.Models.Household", "Household")
                         .WithMany()
-                        .HasForeignKey("BoardId")
+                        .HasForeignKey("HouseholdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("TheCommonRoom_Capstone.Models.Bill", b =>
                 {
-                    b.HasOne("TheCommonRoom_Capstone.Models.Board", "Board")
+                    b.HasOne("TheCommonRoom_Capstone.Models.Household", "Household")
                         .WithMany()
-                        .HasForeignKey("BoardId")
+                        .HasForeignKey("HouseholdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("TheCommonRoom_Capstone.Models.Chore", b =>
                 {
-                    b.HasOne("TheCommonRoom_Capstone.Models.Board", "Board")
+                    b.HasOne("TheCommonRoom_Capstone.Models.Household", "Household")
                         .WithMany()
-                        .HasForeignKey("BoardId")
+                        .HasForeignKey("HouseholdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -582,15 +561,6 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
-                });
-
-            modelBuilder.Entity("TheCommonRoom_Capstone.Models.Household", b =>
-                {
-                    b.HasOne("TheCommonRoom_Capstone.Models.Board", "board")
-                        .WithMany()
-                        .HasForeignKey("BoardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("TheCommonRoom_Capstone.Models.HouseholdAdministrator", b =>
@@ -608,9 +578,9 @@ namespace TheCommonRoom_Capstone.Migrations
 
             modelBuilder.Entity("TheCommonRoom_Capstone.Models.Poll", b =>
                 {
-                    b.HasOne("TheCommonRoom_Capstone.Models.Board", "Board")
+                    b.HasOne("TheCommonRoom_Capstone.Models.Household", "Household")
                         .WithMany()
-                        .HasForeignKey("BoardId")
+                        .HasForeignKey("HouseholdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

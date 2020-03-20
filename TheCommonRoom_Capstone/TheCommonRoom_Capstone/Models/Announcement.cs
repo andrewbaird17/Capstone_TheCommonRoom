@@ -12,6 +12,7 @@ namespace TheCommonRoom_Capstone.Models
         [Key]
         public int Id { get; set; }
         public string Details { get; set; }
+        public DateTime DatePosted { get; set; }
         public string PostedBy { get; set; }
 
         [ForeignKey("Household")]

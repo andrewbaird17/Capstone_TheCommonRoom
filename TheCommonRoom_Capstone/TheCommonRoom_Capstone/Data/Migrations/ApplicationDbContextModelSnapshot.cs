@@ -48,15 +48,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c366858d-c387-4aa1-98d7-4cafdb87e3c7",
-                            ConcurrencyStamp = "40c86034-c0de-4401-a652-3f738d573b3c",
+                            Id = "2c2eecc1-29b8-419a-8fe4-1d425238b33b",
+                            ConcurrencyStamp = "220dcbfd-9256-421d-83a1-7b7fd2dc1ae0",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "db68a4be-1a4c-4508-9236-bafe845e6cee",
-                            ConcurrencyStamp = "5ceea952-82d0-4e7a-9a7a-3f7555845044",
+                            Id = "2a7e941b-bab6-4222-95c9-49ed57fd4201",
+                            ConcurrencyStamp = "8810c6b8-26e7-4ce9-ae89-5e00ed4d0901",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });
@@ -237,6 +237,9 @@ namespace TheCommonRoom_Capstone.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DatePosted")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");

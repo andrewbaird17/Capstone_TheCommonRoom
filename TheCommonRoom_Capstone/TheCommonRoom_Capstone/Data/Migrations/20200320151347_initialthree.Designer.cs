@@ -10,8 +10,8 @@ using TheCommonRoom_Capstone.Data;
 namespace TheCommonRoom_Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200320125057_RemovedBoardModel")]
-    partial class RemovedBoardModel
+    [Migration("20200320151347_initialthree")]
+    partial class initialthree
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c366858d-c387-4aa1-98d7-4cafdb87e3c7",
-                            ConcurrencyStamp = "40c86034-c0de-4401-a652-3f738d573b3c",
+                            Id = "b3fcb823-f6ab-4647-a8de-262f8d16e4ed",
+                            ConcurrencyStamp = "1c0b76ba-dbe5-47d3-946e-b7c350c008dd",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "db68a4be-1a4c-4508-9236-bafe845e6cee",
-                            ConcurrencyStamp = "5ceea952-82d0-4e7a-9a7a-3f7555845044",
+                            Id = "15b7c3c3-29e0-451a-8927-b69ec7503df2",
+                            ConcurrencyStamp = "7d781a3f-9e0e-4554-bf0b-6038d23599ea",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });
