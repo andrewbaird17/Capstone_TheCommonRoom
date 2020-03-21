@@ -55,17 +55,30 @@
 </div>
 <div id="map" style="height:600px; width:500px"></div>
 <script>
-    //var geocoder;
+    var geocoder;
     var map;
     function initMap() {
-        var location = { lat: 43.041, lng: -87.906 };
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: location,
+        geocoder = new google.maps.Geocoder();
+        var mapOptions = {
             zoom: 15
-        });
-        //var marker = new google.maps.Marker({ position: location, map: map })
+        }
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        codeAddress();
     }
-
+    function codeAddress() {
+        var address = "@Model.Location";
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == 'OK') {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('Map could not load due to : ' + status);
+                }
+        });
+    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.APIKey&callback=initMap"
         async defer></script>
