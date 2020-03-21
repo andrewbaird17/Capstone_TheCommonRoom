@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TheCommonRoom</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-materia.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TheCommonRoom</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -20,46 +20,46 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             @if (User.IsInRole("Roommate") || User.IsInRole("Household Administrator"))
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index">Calendar</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Events" asp-action="Index">Calendar</a>
                             }
                         </li>
                         @*<li class="nav-item">
                                 @if (User.IsInRole("Roommate"))
                                 {
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Roommates" asp-action="AddEvent">Add Event</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Roommates" asp-action="AddEvent">Add Event</a>
                                 }
                                 else if (User.IsInRole("Household Administrator"))
                                 {
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="HouseholdAdministrators" asp-action="AddEvent">Add Event</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="HouseholdAdministrators" asp-action="AddEvent">Add Event</a>
                                 }
                             </li>*@
                         <li class="nav-item">
                             @if (User.IsInRole("Roommate") || User.IsInRole("Household Administrator"))
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Announcements" asp-action="Index">Announcements</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Announcements" asp-action="Index">Announcements</a>
                             }
                         </li>
                         <li class="nav-item">
                             @if (User.IsInRole("Roommate") || User.IsInRole("Household Administrator"))
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Bills" asp-action="Index">Bills</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Bills" asp-action="Index">Bills</a>
                             }
                         </li>
                         <li class="nav-item">
                             @if (User.IsInRole("Roommate") || User.IsInRole("Household Administrator"))
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Polls" asp-action="Index">Polls</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Polls" asp-action="Index">Polls</a>
                             }
                         </li>
                         <li class="nav-item">
                             @if (User.IsInRole("Roommate") || User.IsInRole("Household Administrator"))
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Chores" asp-action="Index">Chores</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Chores" asp-action="Index">Chores</a>
                             }
                         </li>
                     </ul>
@@ -73,7 +73,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted">
         <div class="container">
             &copy; 2020 - TheCommonRoom - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
