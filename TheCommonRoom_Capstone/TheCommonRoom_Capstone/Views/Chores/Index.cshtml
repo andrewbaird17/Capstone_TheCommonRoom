@@ -5,16 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Chore List</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChoreAssigned)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChoreCompleted)
             </th>
             <th></th>
         </tr>
@@ -24,6 +27,12 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChoreAssigned)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChoreCompleted)
             </td>
             <td>
                 <a asp-action="EditChore" asp-controller="Roommates" asp-route-id="@item.Id">Mark Chore Completed</a>

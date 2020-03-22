@@ -18,6 +18,10 @@ namespace TheCommonRoom_Capstone.Models
         public string LastName { get; set; }
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+        [Display(Name = "Chore Assigned")]
+        public string ChoreAssigned { get; set; }
+        [Display(Name = "Chore Completed")]
+        public bool ChoreCompleted { get; set; }
 
         [ForeignKey("Household")]
         public int HouseholdId { get; set; }

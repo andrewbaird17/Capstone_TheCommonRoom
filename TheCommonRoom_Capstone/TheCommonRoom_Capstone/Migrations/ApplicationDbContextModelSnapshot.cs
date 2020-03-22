@@ -48,15 +48,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "22df578d-a236-4bd5-b5cb-f86a47f52547",
-                            ConcurrencyStamp = "8d68d9a9-8422-46da-9aa3-984ea485ba17",
+                            Id = "e8eaad98-b9bc-404d-80f0-eef8b2d8be1b",
+                            ConcurrencyStamp = "8064f9fe-25b3-4f58-ab69-8e91827b933a",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "37b5e7ad-aa51-4d97-85ce-b71d25ea66e4",
-                            ConcurrencyStamp = "2e247ead-b75f-4b19-b293-2aa197df68df",
+                            Id = "384aa9e8-1ee9-4d84-8013-b4567c04f3f3",
+                            ConcurrencyStamp = "468c460f-d8b9-4399-a573-c62caac8e3ca",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });
@@ -377,6 +377,12 @@ namespace TheCommonRoom_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ChoreAssigned")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ChoreCompleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -451,6 +457,12 @@ namespace TheCommonRoom_Capstone.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChoreAssigned")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ChoreCompleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");

@@ -71,7 +71,7 @@ namespace TheCommonRoom_Capstone.Controllers
         public async Task<IActionResult> Edit()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var householdAdministrator = await _context.HouseholdAdministrators.FirstOrDefaultAsync(h=> h.IdentityUserId == userId);
+            var householdAdministrator = await _context.HouseholdAdministrators.FirstOrDefaultAsync(h => h.IdentityUserId == userId);
             if (householdAdministrator == null)
             {
                 return NotFound();
@@ -107,7 +107,7 @@ namespace TheCommonRoom_Capstone.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name", householdAdministrator.HouseholdId);          
+            ViewData["HouseholdId"] = new SelectList(_context.Households, "Id", "Name", householdAdministrator.HouseholdId);
             return View(householdAdministrator);
         }
 
@@ -146,7 +146,7 @@ namespace TheCommonRoom_Capstone.Controllers
         {
             return _context.HouseholdAdministrators.Any(e => e.Id == id);
         }
-    
+
         public async Task<IActionResult> ApproveRoommate(int id)
         {
             var roommateInDB = await _context.Roommates.FirstOrDefaultAsync(r => r.Id == id);
@@ -185,8 +185,6 @@ namespace TheCommonRoom_Capstone.Controllers
                 var householdId = _context.HouseholdAdministrators.FirstOrDefault(r => r.IdentityUserId == userId).HouseholdId;
                 chore.HouseholdId = householdId;
                 _context.Add(chore);
-                var household = GetHousehold(householdId);
-                household.HouseChores.Add(chore);
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Index");
@@ -195,20 +193,31 @@ namespace TheCommonRoom_Capstone.Controllers
         public async Task<IActionResult> AssignChores()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var hhaInDB = _context.HouseholdAdministrators.Where(h => h.IdentityUserId == userId).FirstOrDefault();
+            var hhaInDB = await _context.HouseholdAdministrators.Where(h => h.IdentityUserId == userId).FirstOrDefaultAsync();
             var roomatesInHousehold = await _context.Roommates.Where(r => r.HouseholdId == hhaInDB.HouseholdId).ToListAsync();
-            foreach(var roommate in roomatesInHousehold)
+            var chores = await _context.Chores.Where(c => c.HouseholdId == hhaInDB.HouseholdId).ToListAsync();
+            Random random = new Random();
+            for (int i= 0; i < roomatesInHousehold.Count; i++)
             {
-                // assign a chore to the roommate randomly 
-                //check if ChoreAssigned equals previous chore, if true select new chore
+                int j;
+                var currentRoommate = roomatesInHousehold[i];
+                do
+                {
+                    j = GetRandomNum(0, chores.Count, random);
+                } while ((currentRoommate.ChoreAssigned == chores[j].Name));
+                currentRoommate.ChoreAssigned = chores[j].Name;
+                currentRoommate.ChoreCompleted = false;
+                _context.Update(currentRoommate);
+                await _context.SaveChangesAsync();
+                chores.RemoveAt(j);
             }
             return RedirectToAction("Index");
         }
 
-        public Household GetHousehold(int householdId)
+        public int GetRandomNum(int min, int max, Random random)
         {
-            var household =  _context.Households.Where(h => h.Id == householdId).FirstOrDefault();
-            return household;
+            int randNum = random.Next(min, max);
+            return randNum;
         }
     }
 }

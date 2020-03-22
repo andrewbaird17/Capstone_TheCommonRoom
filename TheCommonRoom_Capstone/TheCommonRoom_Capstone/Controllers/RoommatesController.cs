@@ -144,7 +144,7 @@ namespace TheCommonRoom_Capstone.Controllers
             return _context.Roommates.Any(e => e.Id == id);
         }
 
-        [Authorize(Roles = "Roommates")]
+        [Authorize(Roles = "Roommate")]
         public async Task<IActionResult> EditChore(int id)
         {
             var roommate = await _context.Roommates.FindAsync(id);
@@ -156,10 +156,20 @@ namespace TheCommonRoom_Capstone.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                roommate.IdentityUserId = userId;
-                _context.Update(roommate);
-                await _context.SaveChangesAsync();
+                if (roommate.ChoreCompleted == true)
+                {
+                    var roommateUpdate = await _context.Roommates.FindAsync(roommate.Id);
+                    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    roommateUpdate.IdentityUserId = userId;
+                    roommateUpdate.ChoreCompleted = true;
+                    _context.Update(roommateUpdate);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Chores");
+                }
+                else
+                {
+                    return View();
+                }
             }
             return RedirectToAction("Index", "Chores");
         }

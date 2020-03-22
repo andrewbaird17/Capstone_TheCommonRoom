@@ -33,8 +33,6 @@ namespace TheCommonRoom_Capstone.Controllers
                 householdId = _context.HouseholdAdministrators.FirstOrDefault(r => r.IdentityUserId == userId).HouseholdId;
             }
             var roomatesInHousehold = _context.Roommates.Where(r => r.HouseholdId == householdId);
-            // want to pass list of roommates to access their chore assigned
-            // then have option to edit that chore on their controller?
             return View(await roomatesInHousehold.ToListAsync());
         }
     }
