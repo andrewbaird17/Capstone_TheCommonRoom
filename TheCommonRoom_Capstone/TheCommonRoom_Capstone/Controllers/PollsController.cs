@@ -89,10 +89,18 @@ namespace TheCommonRoom_Capstone.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Vote(int id, Poll poll)
         {
-            var pollVoted = await _context.Polls.FirstOrDefaultAsync(p => p.Id == id);
+            var pollVoted = await _context.Polls.FirstOrDefaultAsync(p => p.Id == poll.Id);
             if (ModelState.IsValid)
             {
-                _context.Update(poll);
+                if(poll.CastVoteOptionOne == true)
+                {
+                    pollVoted.VotesForOptionOne += 1;
+                }
+                else if (poll.CastVoteOptionTwo == true)
+                {
+                    pollVoted.VotesForOptionTwo += 1;
+                }
+                _context.Update(pollVoted);
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Index");

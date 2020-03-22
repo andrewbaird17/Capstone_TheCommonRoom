@@ -48,15 +48,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b1bf1c40-9142-4760-9743-656793ffbeb6",
-                            ConcurrencyStamp = "fe7cdc49-cf98-4017-aee3-bde16c9252bc",
+                            Id = "22df578d-a236-4bd5-b5cb-f86a47f52547",
+                            ConcurrencyStamp = "8d68d9a9-8422-46da-9aa3-984ea485ba17",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "116ed299-bb60-43a1-86ca-141cd4411125",
-                            ConcurrencyStamp = "ad511d4d-ba08-4d40-af20-2a6c5a96592d",
+                            Id = "37b5e7ad-aa51-4d97-85ce-b71d25ea66e4",
+                            ConcurrencyStamp = "2e247ead-b75f-4b19-b293-2aa197df68df",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });

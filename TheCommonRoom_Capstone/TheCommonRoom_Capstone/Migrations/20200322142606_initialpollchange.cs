@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheCommonRoom_Capstone.Migrations
 {
-    public partial class initialfour : Migration
+    public partial class initialpollchange : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -295,8 +295,9 @@ namespace TheCommonRoom_Capstone.Migrations
                     OptionTwo = table.Column<string>(nullable: true),
                     VotesForOptionOne = table.Column<int>(nullable: false),
                     VotesForOptionTwo = table.Column<int>(nullable: false),
+                    CastVoteOptionOne = table.Column<bool>(nullable: false),
+                    CastVoteOptionTwo = table.Column<bool>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
-                    TotalAmount = table.Column<double>(nullable: false),
                     HouseholdId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -345,8 +346,8 @@ namespace TheCommonRoom_Capstone.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6e8c019f-971e-484c-bc33-69f25871afc6", "a2995688-62a1-4aef-8cd9-1decc28ce625", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
-                    { "d6c40add-6dfc-4bbc-8f15-f021d0482e31", "b139ef56-63df-426f-a652-0fc9f695152f", "Roommate", "ROOMMATE" }
+                    { "22df578d-a236-4bd5-b5cb-f86a47f52547", "8d68d9a9-8422-46da-9aa3-984ea485ba17", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
+                    { "37b5e7ad-aa51-4d97-85ce-b71d25ea66e4", "2e247ead-b75f-4b19-b293-2aa197df68df", "Roommate", "ROOMMATE" }
                 });
 
             migrationBuilder.InsertData(

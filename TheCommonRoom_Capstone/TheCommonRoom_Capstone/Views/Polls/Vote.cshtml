@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Vote</h1>
+<h1>Cast Your Vote</h1>
 
 <h4>Poll</h4>
 <hr />
@@ -15,24 +15,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Question" class="control-label"></label>
                 <input asp-for="Question" class="form-control" />
                 <span asp-validation-for="Question" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OptionOne" class="control-label"></label>
-                <input type="checkbox" asp-for="OptionOne" class="form-control" />
-                <span asp-validation-for="OptionOne" class="text-danger"></span>
+                <input type="checkbox" asp-for="CastVoteOptionOne" class="form-control" />
+                <span asp-validation-for="CastVoteOptionOne" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OptionTwo" class="control-label"></label>
-                <input type="checkbox"asp-for="OptionTwo" class="form-control" />
-                <span asp-validation-for="OptionTwo" class="text-danger"></span>
+                <input type="checkbox"asp-for="CastVoteOptionTwo" class="form-control" />
+                <span asp-validation-for="CastVoteOptionTwo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -42,7 +37,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Poll List</a>
 </div>
 
 @section Scripts {
