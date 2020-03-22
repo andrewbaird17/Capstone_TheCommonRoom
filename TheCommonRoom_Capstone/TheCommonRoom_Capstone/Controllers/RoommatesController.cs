@@ -147,8 +147,16 @@ namespace TheCommonRoom_Capstone.Controllers
         [Authorize(Roles = "Roommate")]
         public async Task<IActionResult> EditChore(int id)
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var roommate = await _context.Roommates.FindAsync(id);
-            return View(roommate);
+            if (roommate.IdentityUserId == userId)
+            {
+                return View(roommate);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Chores");
+            }
         }
 
         [HttpPost]
