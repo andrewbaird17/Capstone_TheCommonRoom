@@ -17,8 +17,10 @@ namespace TheCommonRoom_Capstone.Models
         public string OptionTwo { get; set; }
         public int VotesForOptionOne { get; set; }
         public int VotesForOptionTwo { get; set; }
+        public bool CastVoteOptionOne { get; set; }
+        public bool CastVoteOptionTwo { get; set; }
         public DateTime DateCreated { get; set; }
-        public double TotalAmount { get; set; }
+
         [ForeignKey("Household")]
         public int HouseholdId { get; set; }
         public Household Household { get; set; }
