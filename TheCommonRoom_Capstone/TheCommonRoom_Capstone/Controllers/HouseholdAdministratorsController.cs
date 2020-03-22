@@ -170,24 +170,45 @@ namespace TheCommonRoom_Capstone.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        public IActionResult AddEvent()
+        public IActionResult AddChore()
         {
-            Event newEvent = new Event();
-            return View(newEvent);
+            Chore chore = new Chore();
+            return View(chore);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEvent(Event eventNew)
+        public async Task<IActionResult> AddChore(Chore chore)
         {
             if (ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                eventNew.IdentityUserId = userId;
-                _context.Add(eventNew);
+                var householdId = _context.HouseholdAdministrators.FirstOrDefault(r => r.IdentityUserId == userId).HouseholdId;
+                chore.HouseholdId = householdId;
+                _context.Add(chore);
+                var household = GetHousehold(householdId);
+                household.HouseChores.Add(chore);
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> AssignChores()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var hhaInDB = _context.HouseholdAdministrators.Where(h => h.IdentityUserId == userId).FirstOrDefault();
+            var roomatesInHousehold = await _context.Roommates.Where(r => r.HouseholdId == hhaInDB.HouseholdId).ToListAsync();
+            foreach(var roommate in roomatesInHousehold)
+            {
+                // assign a chore to the roommate randomly 
+                //check if ChoreAssigned equals previous chore, if true select new chore
+            }
+            return RedirectToAction("Index");
+        }
+
+        public Household GetHousehold(int householdId)
+        {
+            var household =  _context.Households.Where(h => h.Id == householdId).FirstOrDefault();
+            return household;
         }
     }
 }

@@ -49,6 +49,7 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 events.Add(item);
             }
+            //household.HouseEvents = events;
             // pass household when ready to pass list of events
             return View(events);
         }

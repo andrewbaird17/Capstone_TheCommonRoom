@@ -1,22 +1,21 @@
-﻿@model TheCommonRoom_Capstone.Models.Announcement
+﻿@model TheCommonRoom_Capstone.Models.Chore
 
 @{
-    ViewData["Title"] = "AddAnnouncement";
+    ViewData["Title"] = "AddChore";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Add Announcement</h1>
+<h1>Add Chore</h1>
 
-<h4>Add Your Details Below</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddAnnouncement">
+        <form asp-action="AddChore">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Details" class="control-label"></label>
-                <input asp-for="Details" class="form-control" />
-                <span asp-validation-for="Details" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -26,7 +25,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to Details</a>
+    <a asp-action="Index">Back to Roommate List</a>
 </div>
 
 @section Scripts {
