@@ -73,6 +73,7 @@ namespace TheCommonRoom_Capstone.Controllers
                 poll.DateCreated = todayDate;
                 _context.Add(poll);
                 await _context.SaveChangesAsync();
+                return RedirectToAction("TextRoommatesPoll", "Twilio");
             }
             return RedirectToAction("Index");
         }

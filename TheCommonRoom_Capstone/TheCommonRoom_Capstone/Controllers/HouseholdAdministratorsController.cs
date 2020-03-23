@@ -219,5 +219,8 @@ namespace TheCommonRoom_Capstone.Controllers
             int randNum = random.Next(min, max);
             return randNum;
         }
+
     }
 }
+
+
