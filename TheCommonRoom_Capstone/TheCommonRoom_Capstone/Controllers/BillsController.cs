@@ -75,6 +75,7 @@ namespace TheCommonRoom_Capstone.Controllers
                 }
                 _context.Add(bill);
                 await _context.SaveChangesAsync();
+                return RedirectToAction("TextRoommatesBill", "Twilio");
             }
             return RedirectToAction("Index");
         }

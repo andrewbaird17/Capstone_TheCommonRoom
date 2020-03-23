@@ -16,6 +16,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using TheCommonRoom_Capstone.ActionFilters;
 using Stripe;
+using Twilio;
 
 namespace TheCommonRoom_Capstone
 {
@@ -43,6 +44,7 @@ namespace TheCommonRoom_Capstone
             {
                 config.Filters.Add(typeof(GlobalRouting));
             });
+            TwilioClient.Init(My_API_Key.TwilioSid, My_API_Key.TwilioAuthToken);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

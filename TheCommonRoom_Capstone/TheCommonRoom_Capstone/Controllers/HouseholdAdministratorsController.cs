@@ -211,7 +211,7 @@ namespace TheCommonRoom_Capstone.Controllers
                 await _context.SaveChangesAsync();
                 chores.RemoveAt(j);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("TextRoommatesChore", "Twilio");
         }
 
         public int GetRandomNum(int min, int max, Random random)

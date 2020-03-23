@@ -73,6 +73,7 @@ namespace TheCommonRoom_Capstone.Controllers
                 announcement.DatePosted = todayDate;
                 _context.Add(announcement);
                 await _context.SaveChangesAsync();
+                return RedirectToAction("TextRoommatesAnnouncement", "Twilio");
             }
             return RedirectToAction("Index");
         }
