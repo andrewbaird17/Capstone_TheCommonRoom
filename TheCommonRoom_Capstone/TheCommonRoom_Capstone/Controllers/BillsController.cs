@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TheCommonRoom_Capstone.Data;
 using TheCommonRoom_Capstone.Models;
+using Stripe;
+using System.Configuration;
 
 namespace TheCommonRoom_Capstone.Controllers
 {
@@ -77,13 +79,34 @@ namespace TheCommonRoom_Capstone.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Pay()
+        public IActionResult Pay(Bill bill)
         {
-            return View();
+            var stripePublishKey = ConfigurationManager.AppSettings["pk_test_xBeFBgCs0CAI1v47TuxAtsYm00wGr1rXXU"];
+            ViewBag.StripePublishKey = stripePublishKey;
+            return View(bill);
         }
 
-        public IActionResult Charge(string stripeEmail, string stripeToken)
+        public IActionResult Charge(string stripeEmail, string stripeToken, Bill bill)
         {
+            var customers = new CustomerService();
+            var charges = new ChargeService();
+
+            var customer = customers.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                Source = stripeToken
+            });
+            long totalAmount = Convert.ToInt64(bill.TotalAmount);
+            var charge = charges.Create(new ChargeCreateOptions
+            {
+                Amount = (totalAmount*100),//charge in cents
+                Description = "The Common Room Bill Payment",
+                Currency = "usd",
+                Customer = customer.Id
+            });
+
+            // further application specific code goes here
+
             return View();
         }
         //// GET: Bills/Edit/5

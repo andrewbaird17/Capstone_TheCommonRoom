@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using TheCommonRoom_Capstone.ActionFilters;
+using Stripe;
 
 namespace TheCommonRoom_Capstone
 {
@@ -73,6 +74,7 @@ namespace TheCommonRoom_Capstone
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            StripeConfiguration.ApiKey = "pk_test_xBeFBgCs0CAI1v47TuxAtsYm00wGr1rXXU";
         }
     }
 }
