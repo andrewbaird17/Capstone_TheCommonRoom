@@ -1,0 +1,37 @@
+﻿@model TheCommonRoom_Capstone.Models.Bill
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Bill</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PostedBy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PostedBy)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </dt>
+        <dd class = "col-sm-10">
+            $@Html.DisplayFor(model => model.TotalAmount)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Pay" asp-route-id="@Model.Id">Pay My Share</a> |
+    <a asp-action="Index">Back to Bills</a>
+</div>
