@@ -32,6 +32,17 @@ namespace TheCommonRoom_Capstone.Controllers
                 to: new Twilio.Types.PhoneNumber($"+1{roommate.PhoneNumber}")
                 );
             };
+            return RedirectToAction("TextHHA");
+        }
+        public IActionResult TextHHA()
+        {
+            var hha = GetHHA();
+            var message = MessageResource.Create(
+            body: "There's a new notification pending in your household on TheCommonRoom. " +
+            "Log in to your Account to see it!",
+            from: new Twilio.Types.PhoneNumber("+18312221547"),
+            to: new Twilio.Types.PhoneNumber($"+1{hha.PhoneNumber}")
+            );
             return RedirectToAction("EmailRoommates");
         }
         public IActionResult TextRoommatesBill()
@@ -46,7 +57,7 @@ namespace TheCommonRoom_Capstone.Controllers
                 to: new Twilio.Types.PhoneNumber($"+1{roommate.PhoneNumber}")
                 );
             };
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("TextHHA");
         }
         public IActionResult TextRoommatesChore()
         {
@@ -60,7 +71,7 @@ namespace TheCommonRoom_Capstone.Controllers
                 to: new Twilio.Types.PhoneNumber($"+1{roommate.PhoneNumber}")
                 );
             };
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("EmailRoommates");
         }
         public IActionResult TextRoommatesPoll()
         {
@@ -74,19 +85,48 @@ namespace TheCommonRoom_Capstone.Controllers
                 to: new Twilio.Types.PhoneNumber($"+1{roommate.PhoneNumber}")
                 );
             };
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("TextHHA");
         }
         public async Task<IActionResult> EmailRoommates()
         {
-            var apiKey = My_API_Key.SendGridAPI;
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("baird.andrew4@gmail.com", "Example User");
-            var subject = "Sending with Twilio SendGrid is Fun";
-            var to = new EmailAddress("baird.andrew007@gmail.com", "Example User");
-            var plainTextContent = "and easy to do anywhere, even with C#";
-            var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            var response = await client.SendEmailAsync(msg);
+            var roommates = GetRoommates();
+            foreach (var roommate in roommates)
+            {
+                var user = _context.Users.Where(u => u.Id == roommate.IdentityUserId).FirstOrDefault();
+
+                var apiKey = My_API_Key.SendGridAPI;
+                var client = new SendGridClient(apiKey);
+                var from = new EmailAddress("CommonRoom@gmail.com", "Common Room Team");
+                var subject = "New Notification on TheCommonRoom";
+                var to = new EmailAddress(user.Email, $"{roommate.FirstName} {roommate.LastName}");
+                var plainTextContent = "You have a new notification to view in your Common Room account." +
+                    "Please log in to to view!";
+                var htmlContent = "<strong>You have a new notification to view in your Common Room account." +
+                    "Please log in to to view!</strong>";
+                var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+                var response = await client.SendEmailAsync(msg);
+            }
+            return RedirectToAction("EmailHHA");
+        }
+        public async Task<IActionResult> EmailHHA()
+        {
+            var hha = GetHHA();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _context.Users.Where(u => u.Id == hha.IdentityUserId).FirstOrDefault();
+            if (user.Id != userId)
+            {
+                var apiKey = My_API_Key.SendGridAPI;
+                var client = new SendGridClient(apiKey);
+                var from = new EmailAddress("CommonRoom@gmail.com", "Common Room Team");
+                var subject = "New Notification on TheCommonRoom";
+                var to = new EmailAddress(user.Email, $"{hha.FirstName} {hha.LastName}");
+                var plainTextContent = "You have a new notification to view in your TheCommonRoom account." +
+                    "Please log in to to view!";
+                var htmlContent = "<strong>You have a new notification to view in your TheCommonRoom account." +
+                    "Please log in to to view!</strong>";
+                var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+                var response = await client.SendEmailAsync(msg);
+            }
             return RedirectToAction("Index", "Home");
         }
         public List<Roommate> GetRoommates()
@@ -104,6 +144,23 @@ namespace TheCommonRoom_Capstone.Controllers
                 roommatesInHH = _context.Roommates.Where(r => r.HouseholdId == userLoggedIn.HouseholdId).ToList();
             }
             return roommatesInHH;
+        }
+
+        public HouseholdAdministrator GetHHA()
+        {
+            HouseholdAdministrator hha = new HouseholdAdministrator();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (User.IsInRole("Roommate"))
+            {
+                var userLoggedIn = _context.Roommates.Where(r => r.IdentityUserId == userId).FirstOrDefault();
+                hha = _context.HouseholdAdministrators.Where(r => r.HouseholdId == userLoggedIn.HouseholdId).FirstOrDefault();
+            }
+            else
+            {
+                var userLoggedIn = _context.HouseholdAdministrators.Where(r => r.IdentityUserId == userId).FirstOrDefault();
+                hha = _context.HouseholdAdministrators.Where(r => r.HouseholdId == userLoggedIn.HouseholdId).FirstOrDefault();
+            }
+            return hha;
         }
     }
 }

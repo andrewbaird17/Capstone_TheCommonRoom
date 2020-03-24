@@ -53,7 +53,10 @@ namespace TheCommonRoom_Capstone.Controllers
             // pass household when ready to pass list of events
             return View(events);
         }
-
+        public IActionResult Calendar()
+        {
+            return View();
+        }
         // GET: Events/Details/5
         public async Task<IActionResult> Details(int id)
         {
@@ -82,27 +85,27 @@ namespace TheCommonRoom_Capstone.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Events/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        //// GET: Events/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: Events/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //// POST: Events/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
