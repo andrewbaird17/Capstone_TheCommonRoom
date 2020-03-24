@@ -12,6 +12,8 @@
     <Compile Remove="Migrations\20200322142606_initialpollchange.Designer.cs" />
     <Compile Remove="Migrations\20200322184629_updatingroommateproperties.cs" />
     <Compile Remove="Migrations\20200322184629_updatingroommateproperties.Designer.cs" />
+    <Compile Remove="Migrations\20200322184853_initialroommatepropertiesadded.cs" />
+    <Compile Remove="Migrations\20200322184853_initialroommatepropertiesadded.Designer.cs" />
   </ItemGroup>
 
 

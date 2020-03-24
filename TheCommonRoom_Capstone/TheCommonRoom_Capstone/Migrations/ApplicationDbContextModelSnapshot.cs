@@ -15,7 +15,7 @@ namespace TheCommonRoom_Capstone.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -48,15 +48,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e8eaad98-b9bc-404d-80f0-eef8b2d8be1b",
-                            ConcurrencyStamp = "8064f9fe-25b3-4f58-ab69-8e91827b933a",
+                            Id = "a5bb2013-a91f-4479-b50f-6b64d44f7cc4",
+                            ConcurrencyStamp = "5808beb2-4320-477e-be2f-b1f33054b2c5",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "384aa9e8-1ee9-4d84-8013-b4567c04f3f3",
-                            ConcurrencyStamp = "468c460f-d8b9-4399-a573-c62caac8e3ca",
+                            Id = "3c2c0f94-ae59-42ef-90f1-200245c90a31",
+                            ConcurrencyStamp = "f365ec90-9585-4763-aba9-74ef2a421076",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });
@@ -310,6 +310,9 @@ namespace TheCommonRoom_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("AllDay")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -318,9 +321,6 @@ namespace TheCommonRoom_Capstone.Migrations
 
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsFullDay")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheCommonRoom_Capstone.Migrations
 {
-    public partial class initialroommatepropertiesadded : Migration
+    public partial class initialcalendar : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -175,7 +175,7 @@ namespace TheCommonRoom_Capstone.Migrations
                     Description = table.Column<string>(nullable: true),
                     Start = table.Column<DateTime>(nullable: false),
                     End = table.Column<DateTime>(nullable: true),
-                    IsFullDay = table.Column<bool>(nullable: false),
+                    AllDay = table.Column<bool>(nullable: false),
                     Location = table.Column<string>(nullable: true),
                     IdentityUserId = table.Column<string>(nullable: true)
                 },
@@ -350,8 +350,8 @@ namespace TheCommonRoom_Capstone.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "e8eaad98-b9bc-404d-80f0-eef8b2d8be1b", "8064f9fe-25b3-4f58-ab69-8e91827b933a", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
-                    { "384aa9e8-1ee9-4d84-8013-b4567c04f3f3", "468c460f-d8b9-4399-a573-c62caac8e3ca", "Roommate", "ROOMMATE" }
+                    { "a5bb2013-a91f-4479-b50f-6b64d44f7cc4", "5808beb2-4320-477e-be2f-b1f33054b2c5", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
+                    { "3c2c0f94-ae59-42ef-90f1-200245c90a31", "f365ec90-9585-4763-aba9-74ef2a421076", "Roommate", "ROOMMATE" }
                 });
 
             migrationBuilder.InsertData(

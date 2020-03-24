@@ -54,6 +54,37 @@ namespace TheCommonRoom_Capstone.Controllers
         {
             return View();
         }
+
+        public JsonResult GetEvents()
+        {
+            int householdId;
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (User.IsInRole("Roommate"))
+            {
+                householdId = _context.Roommates.FirstOrDefault(r => r.IdentityUserId == userId).HouseholdId;
+            }
+            else
+            {
+                householdId = _context.HouseholdAdministrators.FirstOrDefault(r => r.IdentityUserId == userId).HouseholdId;
+            }
+            var roommates =  _context.Roommates.Where(e => e.HouseholdId == householdId).ToList();
+            var hha = _context.HouseholdAdministrators.FirstOrDefault(a => a.HouseholdId == householdId);
+            List<Event> events = new List<Event>();
+            foreach (var roommate in roommates)
+            {
+                var eventsRoom = _context.Events.Where(e => e.IdentityUserId == roommate.IdentityUserId).ToList();
+                foreach (var item in eventsRoom)
+                {
+                    events.Add(item);
+                }
+            }
+            var eventshha = _context.Events.Where(e => e.IdentityUserId == hha.IdentityUserId).ToList();
+            foreach (var item in eventshha)
+            {
+                events.Add(item);
+            }
+            return new JsonResult(events);
+        }
         // GET: Events/Details/5
         public async Task<IActionResult> Details(int id)
         {
