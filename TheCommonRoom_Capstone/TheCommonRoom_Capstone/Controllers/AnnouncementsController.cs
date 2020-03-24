@@ -32,16 +32,17 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 householdId = _context.HouseholdAdministrators.FirstOrDefault(r => r.IdentityUserId == userId).HouseholdId;
             }
-            var annoucements = _context.Announcements.Where(a=>a.HouseholdId == householdId);
+            var annoucements = _context.Announcements.Where(a => a.HouseholdId == householdId);
 
-            return View( await annoucements.ToListAsync());
+            return View(await annoucements.ToListAsync());
         }
 
-        //// GET: Announcements/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
+        // GET: Announcements/Details/5
+        public ActionResult Details(int id)
+        {
+            var announcement = _context.Announcements.Where(a => a.Id == id).FirstOrDefault();
+            return View(announcement);
+        }
 
         // GET: Announcements/Create
         public ActionResult Create()
@@ -56,7 +57,7 @@ namespace TheCommonRoom_Capstone.Controllers
         public async Task<IActionResult> Create(Announcement announcement)
         {
             var todayDate = DateTime.Now.Date;
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 if (User.IsInRole("Roommate"))
@@ -77,29 +78,35 @@ namespace TheCommonRoom_Capstone.Controllers
             }
             return RedirectToAction("Index");
         }
-        // Add Update of Announcements if 'PostedBy' equals that of the userId of user logged in 
 
+        // Add Update of Announcements if 'PostedBy' equals that of the userId of user logged in 
         // GET: Announcements/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var announcement = _context.Announcements.Where(a => a.Id == id).FirstOrDefault();
+            // only allow member that posted announcement, edit the announcement
+            if (announcement.PostedBy == userId)
+            {
+                return View(announcement);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         // POST: Announcements/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, Announcement announcement)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var todayDate = DateTime.Now.Date;
+            announcement.DatePosted = todayDate;
+            _context.Update(announcement);
+            await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
     }
 }

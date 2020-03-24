@@ -32,7 +32,6 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 householdId = _context.HouseholdAdministrators.FirstOrDefault(r => r.IdentityUserId == userId).HouseholdId;
             }
-            //var household = await _context.Households.Where(h => h.Id == householdId).FirstOrDefaultAsync();
             var roommates = await _context.Roommates.Where(e => e.HouseholdId == householdId).ToListAsync();
             var hha = await _context.HouseholdAdministrators.FirstOrDefaultAsync(a => a.HouseholdId == householdId);
             List<Event> events = new List<Event>();
@@ -49,8 +48,6 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 events.Add(item);
             }
-            //household.HouseEvents = events;
-            // pass household when ready to pass list of events
             return View(events);
         }
         public IActionResult Calendar()

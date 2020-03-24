@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,6 +14,7 @@ namespace TheCommonRoom_Capstone.Models
         public int Id { get; set; }
         public string Details { get; set; }
         public DateTime DatePosted { get; set; }
+        [Display(Name ="Posted By")]
         public string PostedBy { get; set; }
 
         [ForeignKey("Household")]
