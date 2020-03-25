@@ -46,8 +46,8 @@
                 @Html.DisplayFor(model => model.Household.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                <a class="btn btn-outline-info btn-sm" role="button" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> 
+                <a class="btn btn-outline-danger btn-sm" role="button" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
             </td>
         </tr>
     </tbody>

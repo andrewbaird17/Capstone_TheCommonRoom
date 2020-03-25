@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.ChoreCompleted)
             </td>
             <td>
-                <a asp-action="EditChore" asp-controller="Roommates" asp-route-id="@item.Id">Mark Chore Completed</a>
+                <a class="btn btn-outline-primary btn-sm" role="button"asp-action="EditChore" asp-controller="Roommates" asp-route-id="@item.Id">Mark Chore Completed</a>
             </td>
         </tr>
 }

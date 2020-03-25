@@ -49,8 +49,8 @@
                 @Html.DisplayFor(modelItem => item.IsApproved)
             </td>
             <td>
-                <a asp-action="ApproveRoommate" asp-route-id="@item.Id">Approve Roommate</a> |
-                <a asp-action="UnapproveRoommate" asp-route-id="@item.Id">Remove Roommate</a>
+                <a class="btn btn-outline-success btn-sm" role="button" asp-action="ApproveRoommate" asp-route-id="@item.Id">Approve Roommate</a> 
+                <a class="btn btn-outline-warning btn-sm" role="button" asp-action="UnapproveRoommate" asp-route-id="@item.Id">Remove Roommate</a>
             </td>
         </tr>
 }
