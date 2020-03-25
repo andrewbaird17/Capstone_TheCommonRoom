@@ -114,27 +114,40 @@ namespace TheCommonRoom_Capstone.Controllers
         }
 
 
-        //// GET: Events/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
+        // GET: Events/Edit/5
+        public async Task<IActionResult> Edit(int id)
+        {
+            var eventFound = await _context.Events.Where(e => e.Id == id).FirstOrDefaultAsync();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            // only allow member that made that event, edit that event
+            if (eventFound.IdentityUserId == userId)
+            {
+                return View(eventFound);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
-        //// POST: Events/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add update logic here
+        // POST: Events/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Event eventUpdate)
+        {
+            var eventInDB = await _context.Events.Where(e => e.Id == id).FirstOrDefaultAsync();
 
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+            eventInDB.Title = eventUpdate.Title;
+            eventInDB.Description = eventUpdate.Description;
+            eventInDB.Start = eventUpdate.Start;
+            eventInDB.End = eventUpdate.End;
+            eventInDB.AllDay = eventUpdate.AllDay;
+            eventInDB.Location = eventUpdate.Location;
+
+            _context.Update(eventInDB);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
     }
 }
