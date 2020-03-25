@@ -119,7 +119,6 @@ namespace TheCommonRoom_Capstone.Controllers
             return RedirectToAction("Index");
         }
 
-
         // GET: Events/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
