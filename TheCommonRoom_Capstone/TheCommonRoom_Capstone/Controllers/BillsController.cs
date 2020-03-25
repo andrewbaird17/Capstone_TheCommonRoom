@@ -73,6 +73,7 @@ namespace TheCommonRoom_Capstone.Controllers
                     bill.HouseholdId = userLoggedIn.HouseholdId;
                     bill.PostedBy = userLoggedIn.FirstName;
                 }
+                bill.AmountToPayCents = (bill.TotalAmount * 100);
                 _context.Add(bill);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("TextRoommatesBill", "Twilio");
@@ -80,11 +81,12 @@ namespace TheCommonRoom_Capstone.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Pay(Bill bill)
+        public IActionResult Pay(int id)
         {
+            var billChosen = _context.Bills.FirstOrDefault(b => b.Id == id);
             var stripePublishKey = ConfigurationManager.AppSettings["pk_test_xBeFBgCs0CAI1v47TuxAtsYm00wGr1rXXU"];
             ViewBag.StripePublishKey = stripePublishKey;
-            return View(bill);
+            return View(billChosen);
         }
 
         public IActionResult Charge(string stripeEmail, string stripeToken, Bill bill)

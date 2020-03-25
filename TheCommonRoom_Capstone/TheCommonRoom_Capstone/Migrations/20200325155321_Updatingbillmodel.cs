@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheCommonRoom_Capstone.Migrations
 {
-    public partial class initialcalendar : Migration
+    public partial class Updatingbillmodel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -221,6 +221,7 @@ namespace TheCommonRoom_Capstone.Migrations
                     Type = table.Column<string>(nullable: true),
                     PostedBy = table.Column<string>(nullable: true),
                     TotalAmount = table.Column<double>(nullable: false),
+                    AmountToPayCents = table.Column<double>(nullable: false),
                     HouseholdId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -350,8 +351,8 @@ namespace TheCommonRoom_Capstone.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "a5bb2013-a91f-4479-b50f-6b64d44f7cc4", "5808beb2-4320-477e-be2f-b1f33054b2c5", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
-                    { "3c2c0f94-ae59-42ef-90f1-200245c90a31", "f365ec90-9585-4763-aba9-74ef2a421076", "Roommate", "ROOMMATE" }
+                    { "343b4bd1-5ff3-48e7-b2a2-cd45882a1dd4", "adb5c877-6593-4ec1-850e-bd413c478234", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
+                    { "301366ee-412f-4734-b605-3f320ed417db", "f2d7eec8-3a77-47ae-940e-97e343adaf57", "Roommate", "ROOMMATE" }
                 });
 
             migrationBuilder.InsertData(

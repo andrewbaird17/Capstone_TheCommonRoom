@@ -15,6 +15,7 @@ namespace TheCommonRoom_Capstone.Models
         public string PostedBy { get; set; }
         [Display(Name ="Share To Pay")]
         public double TotalAmount { get; set; }
+        public double AmountToPayCents { get; set; }
         [ForeignKey("Household")]
         public int HouseholdId { get; set; }
         public Household Household { get; set; }

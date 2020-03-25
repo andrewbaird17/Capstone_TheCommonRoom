@@ -10,8 +10,8 @@ using TheCommonRoom_Capstone.Data;
 namespace TheCommonRoom_Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200324221500_initialcalendar")]
-    partial class initialcalendar
+    [Migration("20200325155321_Updatingbillmodel")]
+    partial class Updatingbillmodel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a5bb2013-a91f-4479-b50f-6b64d44f7cc4",
-                            ConcurrencyStamp = "5808beb2-4320-477e-be2f-b1f33054b2c5",
+                            Id = "343b4bd1-5ff3-48e7-b2a2-cd45882a1dd4",
+                            ConcurrencyStamp = "adb5c877-6593-4ec1-850e-bd413c478234",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "3c2c0f94-ae59-42ef-90f1-200245c90a31",
-                            ConcurrencyStamp = "f365ec90-9585-4763-aba9-74ef2a421076",
+                            Id = "301366ee-412f-4734-b605-3f320ed417db",
+                            ConcurrencyStamp = "f2d7eec8-3a77-47ae-940e-97e343adaf57",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });
@@ -265,6 +265,9 @@ namespace TheCommonRoom_Capstone.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("AmountToPayCents")
+                        .HasColumnType("float");
 
                     b.Property<int>("HouseholdId")
                         .HasColumnType("int");
