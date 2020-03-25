@@ -13,18 +13,13 @@
         <form asp-action="EditChore">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            @*<div class="form-group">
-                    <label asp-for="ChoreAssigned" class="control-label"></label>
-                    <input asp-for="ChoreCompleted" class="form-control" />
-                    <span asp-validation-for="ChoreCompleted" class="text-danger"></span>
-                </div>*@
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="ChoreCompleted" /> @Html.DisplayFor(model => model.ChoreAssigned)
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary btn-sm" />
             </div>
         </form>
     </div>
