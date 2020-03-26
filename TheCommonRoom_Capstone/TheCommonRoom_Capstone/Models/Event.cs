@@ -19,6 +19,7 @@ namespace TheCommonRoom_Capstone.Models
         [Display(Name = "All day event?")]
         public bool AllDay { get; set; }
         public string Location { get; set; }
+        public string Color { get; set; }
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }

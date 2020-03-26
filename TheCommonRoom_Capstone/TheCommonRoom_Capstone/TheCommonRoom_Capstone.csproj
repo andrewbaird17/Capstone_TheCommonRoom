@@ -16,6 +16,10 @@
     <Compile Remove="Migrations\20200322184853_initialroommatepropertiesadded.Designer.cs" />
     <Compile Remove="Migrations\20200324221500_initialcalendar.cs" />
     <Compile Remove="Migrations\20200324221500_initialcalendar.Designer.cs" />
+    <Compile Remove="Migrations\20200325155321_Updatingbillmodel.cs" />
+    <Compile Remove="Migrations\20200325155321_Updatingbillmodel.Designer.cs" />
+    <Compile Remove="Migrations\20200326135558_addingcolortoroommate.cs" />
+    <Compile Remove="Migrations\20200326135558_addingcolortoroommate.Designer.cs" />
   </ItemGroup>
 
 

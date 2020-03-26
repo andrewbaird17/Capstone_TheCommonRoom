@@ -24,6 +24,8 @@ namespace TheCommonRoom_Capstone.Models
         public string ChoreAssigned { get; set; }
         [Display(Name = "Chore Completed")]
         public bool ChoreCompleted { get; set; }
+        [Display(Name = "Favorite Color")]
+        public string Color { get; set; }
 
         [ForeignKey("Household")]
         public int HouseholdId { get; set; }

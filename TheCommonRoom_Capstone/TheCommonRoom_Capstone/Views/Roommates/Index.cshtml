@@ -14,9 +14,6 @@
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
             <th>
@@ -24,6 +21,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Household)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
             </th>
             <th></th>
         </tr>
@@ -33,9 +33,7 @@
             <td>
                 @Html.DisplayFor(model => model.FirstName)
             </td>
-            <td>
-                @Html.DisplayFor(model => model.LastName)
-            </td>
+
             <td>
                 @Html.DisplayFor(model => model.PhoneNumber)
             </td>
@@ -46,7 +44,10 @@
                 @Html.DisplayFor(model => model.Household.Name)
             </td>
             <td>
-                <a class="btn btn-outline-info btn-sm" role="button" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> 
+                @Html.DisplayFor(model => model.Color)
+            </td>
+            <td>
+                <a class="btn btn-outline-info btn-sm" role="button" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                 <a class="btn btn-outline-danger btn-sm" role="button" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
             </td>
         </tr>

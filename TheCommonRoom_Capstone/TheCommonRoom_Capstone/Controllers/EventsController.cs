@@ -112,6 +112,15 @@ namespace TheCommonRoom_Capstone.Controllers
             if (ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (User.IsInRole("Roommate"))
+                {
+                    var userLoggedIn = _context.Roommates.FirstOrDefault(r => r.IdentityUserId == userId);
+                    eventNew.Color = userLoggedIn.Color;
+                }
+                else
+                {
+                    eventNew.Color = "blue";
+                }
                 eventNew.IdentityUserId = userId;
                 _context.Add(eventNew);
                 await _context.SaveChangesAsync();

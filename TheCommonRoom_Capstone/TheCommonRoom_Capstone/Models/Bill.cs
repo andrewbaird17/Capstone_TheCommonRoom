@@ -12,6 +12,7 @@ namespace TheCommonRoom_Capstone.Models
         [Key]
         public int Id { get; set; }
         public string Type { get; set; }
+        [Display(Name ="Posted By")]
         public string PostedBy { get; set; }
         [Display(Name ="Share To Pay")]
         public double TotalAmount { get; set; }

@@ -47,6 +47,7 @@ namespace TheCommonRoom_Capstone.Controllers
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 roommate.IdentityUserId = userId;
                 roommate.IsApproved = false;
+                roommate.Color = roommate.Color.ToLower();
                 _context.Add(roommate);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -58,12 +59,8 @@ namespace TheCommonRoom_Capstone.Controllers
         // GET: Roommates/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var roommate = await _context.Roommates.FindAsync(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var roommate = await _context.Roommates.FirstOrDefaultAsync(r => r.IdentityUserId == userId);
             if (roommate == null)
             {
                 return NotFound();

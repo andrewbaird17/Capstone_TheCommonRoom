@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheCommonRoom_Capstone.Migrations
 {
-    public partial class Updatingbillmodel : Migration
+    public partial class AddedColorToEventForUseWithFUllCalendar : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -177,6 +177,7 @@ namespace TheCommonRoom_Capstone.Migrations
                     End = table.Column<DateTime>(nullable: true),
                     AllDay = table.Column<bool>(nullable: false),
                     Location = table.Column<string>(nullable: true),
+                    Color = table.Column<string>(nullable: true),
                     IdentityUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -326,6 +327,7 @@ namespace TheCommonRoom_Capstone.Migrations
                     IsApproved = table.Column<bool>(nullable: false),
                     ChoreAssigned = table.Column<string>(nullable: true),
                     ChoreCompleted = table.Column<bool>(nullable: false),
+                    Color = table.Column<string>(nullable: true),
                     HouseholdId = table.Column<int>(nullable: false),
                     IdentityUserId = table.Column<string>(nullable: true)
                 },
@@ -351,8 +353,8 @@ namespace TheCommonRoom_Capstone.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "343b4bd1-5ff3-48e7-b2a2-cd45882a1dd4", "adb5c877-6593-4ec1-850e-bd413c478234", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
-                    { "301366ee-412f-4734-b605-3f320ed417db", "f2d7eec8-3a77-47ae-940e-97e343adaf57", "Roommate", "ROOMMATE" }
+                    { "046626e5-132d-43eb-835b-448581e39a11", "6a2cc139-2a23-4833-8db8-c261fa74c241", "Household Administrator", "HOUSEHOLD ADMINISTRATOR" },
+                    { "a44a1596-5692-43e0-bca0-a2bbf93c0a23", "17637d07-382f-4b0d-9a54-1fb45c6558ad", "Roommate", "ROOMMATE" }
                 });
 
             migrationBuilder.InsertData(

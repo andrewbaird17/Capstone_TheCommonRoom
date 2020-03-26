@@ -48,15 +48,15 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "343b4bd1-5ff3-48e7-b2a2-cd45882a1dd4",
-                            ConcurrencyStamp = "adb5c877-6593-4ec1-850e-bd413c478234",
+                            Id = "046626e5-132d-43eb-835b-448581e39a11",
+                            ConcurrencyStamp = "6a2cc139-2a23-4833-8db8-c261fa74c241",
                             Name = "Household Administrator",
                             NormalizedName = "HOUSEHOLD ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "301366ee-412f-4734-b605-3f320ed417db",
-                            ConcurrencyStamp = "f2d7eec8-3a77-47ae-940e-97e343adaf57",
+                            Id = "a44a1596-5692-43e0-bca0-a2bbf93c0a23",
+                            ConcurrencyStamp = "17637d07-382f-4b0d-9a54-1fb45c6558ad",
                             Name = "Roommate",
                             NormalizedName = "ROOMMATE"
                         });
@@ -316,6 +316,9 @@ namespace TheCommonRoom_Capstone.Migrations
                     b.Property<bool>("AllDay")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -466,6 +469,9 @@ namespace TheCommonRoom_Capstone.Migrations
 
                     b.Property<bool>("ChoreCompleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
