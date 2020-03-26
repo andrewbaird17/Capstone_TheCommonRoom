@@ -96,12 +96,13 @@ namespace TheCommonRoom_Capstone.Controllers
 
                 var apiKey = My_API_Key.SendGridAPI;
                 var client = new SendGridClient(apiKey);
+                // change 'from' to a different email address if needed in future
                 var from = new EmailAddress("CommonRoom@gmail.com", "Common Room Team");
                 var subject = "New Notification on TheCommonRoom";
                 var to = new EmailAddress(user.Email, $"{roommate.FirstName} {roommate.LastName}");
-                var plainTextContent = "You have a new notification to view in your Common Room account." +
+                var plainTextContent = "You have a new notification to view in your Common Room account. " +
                     "Please log in to to view!";
-                var htmlContent = "<strong>You have a new notification to view in your Common Room account." +
+                var htmlContent = "<strong>You have a new notification to view in your Common Room account. " +
                     "Please log in to to view!</strong>";
                 var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
                 var response = await client.SendEmailAsync(msg);
@@ -120,9 +121,9 @@ namespace TheCommonRoom_Capstone.Controllers
                 var from = new EmailAddress("CommonRoom@gmail.com", "Common Room Team");
                 var subject = "New Notification on TheCommonRoom";
                 var to = new EmailAddress(user.Email, $"{hha.FirstName} {hha.LastName}");
-                var plainTextContent = "You have a new notification to view in your TheCommonRoom account." +
+                var plainTextContent = "You have a new notification to view in your TheCommonRoom account. " +
                     "Please log in to to view!";
-                var htmlContent = "<strong>You have a new notification to view in your TheCommonRoom account." +
+                var htmlContent = "<strong>You have a new notification to view in your TheCommonRoom account. " +
                     "Please log in to to view!</strong>";
                 var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
                 var response = await client.SendEmailAsync(msg);
@@ -145,7 +146,6 @@ namespace TheCommonRoom_Capstone.Controllers
             }
             return roommatesInHH;
         }
-
         public HouseholdAdministrator GetHHA()
         {
             HouseholdAdministrator hha = new HouseholdAdministrator();

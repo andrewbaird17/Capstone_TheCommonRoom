@@ -4,9 +4,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Bills</h1>
-
+<center>
+    <h1>Bills</h1>
+</center>
 <p>
     <a class="btn btn-primary" role="button" asp-action="Create">Add New Bill</a>
 </p>
@@ -26,21 +26,22 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostedBy)
-            </td>
-            <td>
-                $@Html.DisplayFor(modelItem => item.TotalAmount)
-            </td>
-            <td>
-                <a class="btn btn-outline-info btn-sm" role="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostedBy)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td>
+                    <a class="btn btn-outline-info btn-sm" role="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
