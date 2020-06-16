@@ -48,12 +48,13 @@ namespace TheCommonRoom_Capstone.Controllers
             {
                 events.Add(item);
             }
-            return View(events);
+            var eventsDateSorted = events.OrderByDescending(d => d.Start);
+            return View(eventsDateSorted);
         }
         public async Task<IActionResult> UserIndex()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userEvents = await _context.Events.Where(e => e.IdentityUserId == userId).ToListAsync();
+            var userEvents = await _context.Events.Where(e => e.IdentityUserId == userId).OrderByDescending(d => d.Start).ToListAsync();
             return View(userEvents);
         }
         public IActionResult Calendar()

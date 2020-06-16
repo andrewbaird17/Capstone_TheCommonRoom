@@ -33,11 +33,11 @@ namespace TheCommonRoom_Capstone.Controllers
                 var hhaInfo = _context.HouseholdAdministrators.Where(c => c.IdentityUserId == userId).FirstOrDefault();
                 if (hhaInfo == null)
                 {
-                    return RedirectToAction("Create", "Administrators");
+                    return RedirectToAction("Create", "HouseholdAdministrators");
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Administrators");
+                    return RedirectToAction("Index", "HouseholdAdministrators");
                 }
             }
             else if (User.IsInRole("Roommate"))
@@ -46,11 +46,11 @@ namespace TheCommonRoom_Capstone.Controllers
                 var roommateInfo = _context.Roommates.Where(c => c.IdentityUserId == userId).FirstOrDefault();
                 if (roommateInfo == null)
                 {
-                    return RedirectToAction("Create", "Administrators");
+                    return RedirectToAction("Create", "Roommates");
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Administrators");
+                    return RedirectToAction("Index", "Roommates");
                 }
             }
             else
